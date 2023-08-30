@@ -30,3 +30,9 @@ jobs:
         run: ./gradlew applyPatches
       - name: Build
         run: ./gradlew createReobfBundlerJar --scan
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: jar
+          path: ./build/libs/
+          if-no-files-found: error
