@@ -9,9 +9,14 @@ jobs:
   repo-sync:
     runs-on: ubuntu-latest
     steps:
-      - uses: TG908/fork-sync@v1.6.3
+      - name: Fork Sync
+        # You may pin to the exact commit or the version.
+        # uses: tgymnich/fork-sync@0cc6ac48fd51415e7c34e5b8823021bc952a5f5f
+        uses: tgymnich/fork-sync@v1.2.1
         with:
+          # Owner of the forked repository
+          owner: PaperMc # optional
+          # Token for the github API
           github_token: ${{ secrets.TOKEN }}
-          owner: PaperMc # fork 的上游仓库 user
-          head: master # fork 的上游仓库 branch
-          base: master # 本地仓库 branch
+          # ignore Exceptions
+          ignore_fail: True # optional
