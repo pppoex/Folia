@@ -60,6 +60,6 @@ jobs:
       - name: Delete old workflow runs
         uses: MajorScruffy/delete-old-workflow-runs@v0.3.0
         with :
-          repository: Folia-AutoBuild
+          repository: pppoex/Folia-AutoBuild
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
