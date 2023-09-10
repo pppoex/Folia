@@ -29,13 +29,13 @@ jobs:
       - name: Apply Patches
         run: ./gradlew applyPatches
       - name: Build
-        run: ./gradlew createReobfBundlerJar --scan
-      - name: Upload artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: folia jar
-          path: ./build/libs/
-          if-no-files-found: error
+        run: ./gradlew createReobfBundlerJar
+      #- name: Upload artifact
+      #  uses: actions/upload-artifact@v2
+      #  with:
+      #    name: folia jar
+      #    path: ./build/libs/
+      #    if-no-files-found: error
       - name: Generate release tag
         id: tag
         run: |
@@ -57,3 +57,8 @@ jobs:
           delete_tags: true
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
+      - name: Delete old workflow runs
+        uses: MajorScruffy/delete-old-workflow-runs@v0.3.0
+        with :
+          repository: Folia-AutoBuild
+
