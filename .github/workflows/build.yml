@@ -27,9 +27,14 @@ jobs:
       - name: Configure Git User Details
         run: git config --global user.email "actions@github.com" && git config --global user.name "Github Actions"
       - name: Apply Patches
-        run: ./gradlew applyPatches
+        run: | 
+          git clone https://github.com/PaperMC/Folia.git FOLIA -b dev/1.20.2
+          cd FOLIA
+          ./gradlew applyPatches
       - name: Build
-        run: ./gradlew createReobfBundlerJar
+        run: |
+          cd FOLIA
+          ./gradlew createReobfBundlerJar
       #- name: Upload artifact
       #  uses: actions/upload-artifact@v2
       #  with:
@@ -49,7 +54,7 @@ jobs:
         with:
           tag_name: ${{ steps.tag.outputs.release_tag }}
           body_path: release.txt
-          files: ./build/libs/*.jar
+          files: ./FOLIA/build/libs/*.jar
       - name: Remove old Releases
         uses: dev-drprasad/delete-older-releases@v0.1.0
         with:
